@@ -71,26 +71,26 @@ mod project {
 			*self
 		}
 	}
-	use phf::phf_map;
+
 	impl Language {
 
 		fn from(s: String) -> Language {
-			let lang_map: phf::Map<&str, Language> = phf_map! {
-				"c"           => Language::C,
-				"cpp"         => Language::Cpp,
-				"c++"         => Language::Cpp,
-				"java"        => Language::Java,
-				"rust"        => Language::Rust,
-				"bash"        => Language::Bash,
-				"shell"       => Language::Bash,
-				"shellscript" => Language::Bash,
-				"r"           => Language::R,
-				"rscript"     => Language::R,
-				"inherit"     => Language::Inherit,
-			};
+			let lang_map: HashMap<&str, Language> = [
+				("c",     Language::C),
+				("cpp",   Language::Cpp),
+				("c++",   Language::Cpp),
+				("java",  Language::Java),
+				("rust",  Language::Rust),
+				("bash",  Language::Bash),
+				("shell", Language::Bash),
+				("shellscript", Language::Bash),
+				("r", Language::R),
+				("rscript", Language::R),
+				("inherit", Language::Inherit)
+				].iter().cloned().collect();
 			s.make_ascii_lowercase();
-			if lang_map.contains_key(s.as_ref()) {
-				return match lang_map.get(s.as_ref()) {
+			if lang_map.contains_key(s.as_str()) {
+				return match lang_map.get(s.as_str()) {
 				Some(lang) => lang.clone(),
 				None       => Language::Inherit
 			}}
@@ -122,9 +122,9 @@ mod project {
 				template: String::from("")
 			};
 
-			for (key, val) in flags.iter() { match key {
-				flags::LANG1     | flags::LANG2     => { res.language  = Language::from(val[0]) },
-				flags::BUILD1    | flags::BUILD2    => { res.buildtool = Buildtool::from(val)   },
+			for (key, val) in flags.iter() { match key.clone() {
+				flags::LANG1     | flags::LANG2     => { res.language  = Language::from(val[0].clone()) },
+				flags::BUILD1    | flags::BUILD2    => { res.buildtool = Buildtool::from(val.clone())   },
 				flags::TEMPLATE1 | flags::TEMPLATE2 => { res.template  = val[0]                 },
 			}}
 			return res;

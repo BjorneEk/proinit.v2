@@ -12,7 +12,7 @@ pub mod config {
 	pub fn config_dir() -> Result<String, &'static str> {
 		match home::home_dir() {
 			Some(path) => match path.to_str().clone() {
-				Some(str) => Ok(String::from(str).push_str("/.proinit")),
+				Some(str) => Ok(String::from(str)),
 				None      => Err("could not find home directory")
 			},
 			None => Err("could not find home directory")
