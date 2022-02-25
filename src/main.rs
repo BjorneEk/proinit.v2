@@ -6,6 +6,8 @@ use proinit::config::*;
 use proinit::args::*;
 use proinit::interface::*;
 
+use proinit::project::*;
+
 /*--------------------------------------------------------------*
  *                  proinit rewritten in rust
  *    @author Gustaf Franzén :: https://github.com/BjorneEk;
@@ -25,6 +27,8 @@ fn main() -> std::io::Result<()>  {
 		Err(err) => { interface::exit_error(String::from(err), false);  HashMap::new() }
 	};
 
+	let proj = project::Project::from(name, args.clone());
+	println!("name: {}, language: {:?}, buildtool: {:?}, template {}", proj.name, proj.language.to_string(), proj.buildtool.to_string(), proj.template);
 	for (key, val) in args.iter() {
 		print!("{}", key);
 		for p in val {

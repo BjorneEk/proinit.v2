@@ -7,9 +7,6 @@ pub mod args {
 	use std::collections::HashMap;
 
 
-	struct Arg {
-
-	}
 
 	pub fn project_name() -> String {
 		match env::args().nth(1) {
