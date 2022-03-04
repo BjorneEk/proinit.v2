@@ -1,0 +1,23 @@
+
+
+
+{
+	{
+		"name": "default",
+		"language": "c",
+		"source": "default_c",
+		"buildtool": "makefile",
+		"buildtool-template": "default",
+		"extra": true,
+		"extra-template": "git_c"
+	},
+	{
+		"name": "sdl2",
+		"language": "c",
+		"source": "sdl2",
+		"buildtool": "makefile",
+		"buildtool-template": "sdl2",
+		"extra": false,
+		"extra-template": ""
+	}
+}

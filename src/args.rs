@@ -30,11 +30,14 @@ pub mod args {
 				let mut params = Vec::new();
 				if res.contains_key(arg) { return Err("argument declared twice"); }
 				for param in &mut args_in[i+1..].iter() {
-					if param.chars().next().unwrap() != '-' { params.push(param.clone()) }
+					let mut p = param.clone();
+					p.make_ascii_lowercase();
+					if p.chars().next().unwrap() != '-' { params.push(p.clone()) }
 					else { break; }
 				}
-
-				res.insert(arg.clone(), params);
+				let mut a = arg.clone();
+				a.make_ascii_lowercase();
+				res.insert(a.clone(), params);
 			}
 		}
 		return Ok(res);

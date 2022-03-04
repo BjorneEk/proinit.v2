@@ -104,10 +104,10 @@ pub mod project {
 	impl Project {
 		pub fn from(project_name: String, flags: HashMap<String, Vec<String>>) -> Project {
 			let mut res = Project {
-				name: project_name,
+				name:      project_name,
 				language:  Language::Inherit,
 				buildtool: Buildtool::Inherit,
-				template: String::from("")
+				template:  String::from("default")
 			};
 
 			for (key, val) in flags.iter() { match key.as_str() {

@@ -3,6 +3,7 @@
 pub mod interface;
 pub mod args;
 pub mod project;
+pub mod template;
 //use std::fs;
 
 
